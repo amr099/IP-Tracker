@@ -1,119 +1,68 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <meta
-            http-equiv="Content-Security-Policy"
-            content="upgrade-insecure-requests"
-        />
-        <link
-            rel="icon"
-            type="image/png"
-            sizes="32x32"
-            href="./images/favicon-32x32.png"
-        />
-        <link rel="stylesheet" href="index.css" />
-        <link
-            rel="stylesheet"
-            href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
-            integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
-            crossorigin=""
-        />
-        <script
-            src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
-            integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
-            crossorigin=""
-        ></script>
-        <title>Frontend Mentor | IP Address Tracker</title>
-        <script async>
-            var map;
-            window.addEventListener("load", async () => {
-                await getLocation();
-            });
-            async function getLocation() {
-                let ip = document.querySelector("input").value;
-                try {
-                    let res = await fetch(`https://ipapi.co/${ip}/json`);
-                    let data = await res.json();
-                    if (data.error) {
-                        document.querySelector(".error").innerHTML =
-                            data.reason;
-                        document.querySelector(".error").style.display =
-                            "block";
-                        return;
-                    } else {
-                        document.querySelector(".error").style.display = "none";
-                        if (map != undefined) {
-                            map.remove();
-                        }
-                        document.querySelector(".ip").innerHTML = data.ip;
-                        document.querySelector(
-                            ".location"
-                        ).innerHTML = `${data.region}, ${data.country}`;
-                        document.querySelector(".timezone").innerHTML =
-                            data.timezone;
-                        document.querySelector(".isp").innerHTML = data.org;
-
-                        map = L.map("map").setView(
-                            [data.latitude, data.longitude],
-                            13
-                        );
-                        L.tileLayer(
-                            "https://tile.openstreetmap.org/{z}/{x}/{y}.png",
-                            {
-                                maxZoom: 19,
-                                attribution:
-                                    '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',
-                            }
-                        ).addTo(map);
-                        var marker = L.marker([
-                            data.latitude,
-                            data.longitude,
-                        ]).addTo(map);
-                    }
-                } catch (err) {
-                    document.querySelector(".error").innerHTML = err;
-                    document.querySelector(".error").style.display = "block";
-                }
-            }
-        </script>
-    </head>
-    <body>
-        <header>
-            <h1>IP Address Tracker</h1>
-            <div class="search">
-                <input
-                    type="text"
-                    placeholder="Search for any IP address or domain"
-                />
-                <button onclick="getLocation()">></button>
-            </div>
-            <span class="error"></span>
-        </header>
-        <main>
-            <div>
-                <h4>IP Address</h4>
-                <h2 class="ip"></h2>
-            </div>
-            <hr />
-            <div>
-                <h4>Location</h4>
-                <h2 class="location"></h2>
-            </div>
-            <hr />
-            <div>
-                <h4>Timezone</h4>
-                <h2 class="timezone"></h2>
-            </div>
-            <hr />
-            <div>
-                <h4>ISP</h4>
-                <h2 class="isp"></h2>
-            </div>
-        </main>
-        <div id="map">
-            <!-- MAP -->
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="upgrade-insecure-requests"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="./images/favicon-32x32.png"
+    />
+    <link rel="stylesheet" href="style.css" />
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+      integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
+      crossorigin=""
+    />
+    <script
+      src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+      integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
+      crossorigin=""
+    ></script>
+    <title>Frontend Mentor | IP Address Tracker</title>
+    <script src="main.js"></script>
+  </head>
+  <body>
+    <header>
+      <div class="container">
+        <h1>IP Address Tracker</h1>
+        <div class="input-wrapper">
+          <input
+            type="text"
+            placeholder="Search for any IP address or domain"
+          />
+          <button onclick="getLocation()">></button>
         </div>
-    </body>
+        <p class="error">Error:</p>
+      </div>
+    </header>
+    <main class="info">
+      <div>
+        <h4>IP Address</h4>
+        <h2 class="ip"></h2>
+      </div>
+      <hr />
+      <div>
+        <h4>Location</h4>
+        <h2 class="location"></h2>
+      </div>
+      <hr />
+      <div>
+        <h4>Timezone</h4>
+        <h2 class="timezone"></h2>
+      </div>
+      <hr />
+      <div>
+        <h4>ISP</h4>
+        <h2 class="isp"></h2>
+      </div>
+    </main>
+    <div id="map" class="map"></div>
+  </body>
 </html>
