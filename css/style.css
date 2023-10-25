@@ -3,7 +3,7 @@
   src: url(../fonts/Rubik.ttf);
 }
 :root {
-  --main-color:#fff;
+  --main-color: #fff;
   --gray: hsl(0, 0%, 59%);
 }
 
@@ -23,14 +23,9 @@ body {
   padding: 0 1rem;
 }
 
-@media (min-width: 1200px) {
+@media (min-width: 576px) {
   .container {
-    width: 1140px;
-  }
-}
-@media (min-width: 992px) {
-  .container {
-    width: 960px;
+    width: 540px;
   }
 }
 @media (min-width: 769px) {
@@ -38,12 +33,18 @@ body {
     width: 720px;
   }
 }
-@media (min-width: 576px) {
+@media (min-width: 992px) {
   .container {
-    width: 540px;
+    width: 960px;
   }
 }
-input, button {
+@media (min-width: 1200px) {
+  .container {
+    width: 1140px;
+  }
+}
+input,
+button {
   all: unset;
 }
 
@@ -62,6 +63,8 @@ header h1 {
 }
 header .input-wrapper {
   display: flex;
+  max-width: 600px;
+  margin: 0 auto;
   justify-content: center;
   align-items: center;
   border-radius: 1rem;
@@ -143,7 +146,8 @@ header .error {
   h1 {
     font-size: 1rem;
   }
-  input, button {
+  input,
+  button {
     font-size: 0.6rem;
   }
   h2 {
