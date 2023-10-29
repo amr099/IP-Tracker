@@ -129,7 +129,7 @@ header .error {
     padding-bottom: 12rem;
   }
   .info {
-    width: 60%;
+    min-width: 60%;
     flex-direction: column;
     gap: 1rem;
     text-align: center;
