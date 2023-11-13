@@ -14,6 +14,11 @@
   box-sizing: border-box;
 }
 
+html{
+ overflow-x: hidden;
+  word-break: break-all
+}
+
 body {
   font-family: rubik, sans-serif;
 }
